@@ -1,0 +1,80 @@
+{% load static %}
+
+<header class="section-header">
+<div class="text-right border-bottom mt-1">
+	<div class="container">
+            <a href="mailto:asdasdasd@gmail.com?subject=Contacto" class="nav-link d-inline text-secondary"><i class="fa fa-envelope"></i> Mail</a>
+            <a href="#" class="nav-link d-inline text-secondary"><i class="fab fa-whatsapp"></i> asdas</a>
+            <a href="tel:11111111" class="nav-link d-inline text-secondary"><i class="fa fa-phone"></i></a>
+
+	</div>
+</div>
+
+<section class="header-main border-bottom">
+	<div class="row">
+		<a href="{% url 'home' %}" class="brand-wrap ml-auto mr-auto"><img class="logo img-fluid" src="{% static './images/logo.png' %}"></a>
+	</div>
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-white">
+		<button class="navbar-toggler mr-auto ml-auto" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-0">
+				<li class="nav-item active text-center mt-3">
+					<div class="category-wrap dropdown">
+					
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
+							<i class="fa fa-bars"></i> Categorías
+						</button>
+
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'tienda' %}">Ver todo</a>
+              				{% for category in links %}
+                				<a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+              				{% endfor %}
+						</div>
+						<a href="{% url 'tienda' %}" class="btn btn-outline-primary mr-1">Tienda</a>
+					</div> 
+				</li>
+				<li class="nav-item mt-3">
+					<form action="{% url 'search' %}" class="search" method='GET'>
+							<div class="input-group w-100">
+								<input type="text" class="form-control" style="width: 60%" placeholder="Buscar" name="keyword"/>
+								<div class="input-group-append">
+								<button class="btn btn-primary" type="submit">
+									<i class="fa fa-search"></i>
+								</button>
+								</div>
+							</div>
+					</form> 
+				</li>
+				<li class="ml-2 mt-3">
+					<div class="d-flex justify-content-center">
+						{% if user.id is None %}
+						<div class="widget-header">
+							<small class="title text-muted">Bienvenido invitado</small>
+							<div> 
+                				<a href="{% url 'login' %}">Ingresar</a>
+								<span class="dark-transp"> | </span>
+								<a href="{% url 'register' %}"> Registrarse</a>
+							</div>
+						</div>
+						{% else %}
+						<div class="widget-header">
+							<small class="title text-muted">Bienvenido/a <strong>{{ user.first_name }}</strong></small>
+							<div> 
+                				<a href="{% url 'dashboard' %}">Mi sección</a>
+                				<span class="dark-transp"> | </span>
+                				<a href="{% url 'logout' %}"> Salir</a>
+							</div>
+						</div>
+						{% endif %}
+						<a href="{% url 'cart' %}" class="widget-header pl-3 ml-3"><div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div><span class="badge badge-pill badge-danger notify">{{ cart_count }}</span></a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</section> 
+</header> 

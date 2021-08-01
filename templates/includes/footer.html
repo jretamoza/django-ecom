@@ -1,0 +1,23 @@
+<footer class="section-footer border-top">
+	<div class="container">
+		<section class="footer-bottom text-center">
+			<div class="col-md-12">
+				<p class="text-muted"> &copy 2021 Comercio</p>
+			</div>
+		</section>
+	</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function(){
+		$('.thumb a').click(function(e){
+			e.preventDefault();
+			$('.mainImage img').attr('src', $(this).attr("href"));
+		});
+	})
+</script>
+
+</body>
+</html>
